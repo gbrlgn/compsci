@@ -1,0 +1,20 @@
+<meta charset="UTF-8">
+<script>
+    function pulaLinha(){
+        document.write("<br>");
+    }
+
+    function mostra(frase){
+        document.write(frase);
+    }
+
+    function quantGeracoes(inicio, ger){
+        return Math.round(inicio / ger);
+    }
+
+    i = 1500
+    ii = 28
+
+    mostra("Nossa diferença de idade é" + quantGeracoes(i, ii));
+    pulaLinha();
+</script>

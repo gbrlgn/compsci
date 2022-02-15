@@ -1,0 +1,3 @@
+#!/bin/sh
+
+git --git-dir="/home/user/Documentos/Git/projeto/servidor" --work-tree="/home/user/Documentos/Git/projeto/web" checkout -f

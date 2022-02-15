@@ -1,0 +1,1 @@
+jobs # mostra processos parados.

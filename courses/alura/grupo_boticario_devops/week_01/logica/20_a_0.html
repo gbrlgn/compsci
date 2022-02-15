@@ -1,0 +1,21 @@
+<meta charset="UTF-8">
+
+<script>
+    function pulaLinha() {
+        document.write("<br>");
+        document.write("<br>");
+    }
+
+    function mostra(frase) {
+        document.write(frase);
+        pulaLinha();
+    }
+
+    var x = 20;
+    while (x >= 0 && x <= 20) {
+        mostra(x);
+        x--;
+        pulaLinha();
+    }
+    mostra("FIM")
+</script>

@@ -1,0 +1,33 @@
+public class Funcionario {
+    private String nome;
+    private float salario;
+    private int irrf;
+    public void setSalario(float sal) {
+        this.salario = sal;
+    }
+    public void setNome(nom) {
+        this.nome = nom;
+    }
+    public String getSalario() {
+        return this.salario;
+    }
+    public String getNome() {
+        return this.nome;
+    }
+    public int getIrrf() {
+        salario = this.salario;
+        switch (salario) {
+            case salario <= 1100.0:
+                return this.salario * 0.075;
+                break;
+            case salario >= 1100.01 && salario <= 2203.48:
+                return this.salario * 0.09;
+                break;
+            case salario >= 2203.49 && salario <= 3305.22:
+                return this.salario * 0.012;
+                break;
+            case salario >= 3305.23 && salario <= 6433.57:
+                return this.salario * 0.014;
+        }
+    }
+}

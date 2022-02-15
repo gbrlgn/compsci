@@ -1,0 +1,4 @@
+*/2 * * * * compsci/courses/alura/grupo_boticario_devops/week_8/shell_2/scripts/monitorar_servidor.sh
+
+
+14 10 * * * compsci/courses/alura/grupo_boticario_devops/week_8/shell_2/scripts/backup_aws.sh
