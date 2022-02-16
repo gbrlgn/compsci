@@ -1,3 +1,9 @@
+$script_mysql = <<-SCRIPT
+    apt-get update && \
+    apt-get install -y mysql-server-5.7 && \
+    mysql -e "create user 'phpuser'@'%' identified by 'pass';"
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
   config.vm.network "forwarded_port", guest: 80, host: 8089
@@ -7,5 +13,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",
     inline: "cat /configs/id_bionic.pub >> .ssh/authorized_keys"
   config.vm.provision "shell",
-    inline: "apt-get update && apt-get install -y mysql-server-5.7"
+    inline: $script_mysql
+
 end
