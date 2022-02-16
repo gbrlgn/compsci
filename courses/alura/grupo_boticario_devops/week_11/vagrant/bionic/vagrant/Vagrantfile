@@ -5,5 +5,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./configs", "/configs"
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.provision "shell",
-        inline: "cat /configs/id_bionic.pub >> .ssh/authorized_keys"
+    inline: "cat /configs/id_bionic.pub >> .ssh/authorized_keys"
+  config.vm.provision "shell",
+    inline: "apt-get update && apt-get install -y mysql-server-5.7"
 end
