@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+    - name: 'Instala o PHP 8'
+      apt:
+        name: php8
+        state: latest
+      become: yes
+    - name: 'Instala o Apache'
+      apt:
+        name: apache2
+        state: latest
+      become: yes
