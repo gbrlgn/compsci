@@ -1,5 +1,12 @@
 ---
 hosts: database
+  handlers:
+    - name: restart mysql
+      service:
+        name: mysql
+        state: restarted
+      become: yes
+
   tasks:
     - name: 'Instala pacotes de dependência do SO'
       apt:
@@ -23,6 +30,19 @@ hosts: database
         password: cso
         priv: 'wordpress_db.*:ALL'
         state: present
+        host: '{{ item }}'
+      with_items:
+        - 'localhost'
+        - '127.0.0.1'
+        - '172.17.177.40'
+
+    - name: 'Configura o MySQL para aceitar conexões remotas'
+      copy:
+        src: 'files/my.cnf'
+        dest: '/etc/mysql/my.cnf'
+      become: yes
+      notify:
+        - restart mysql
 
 - hosts: wordpress
   handlers:
