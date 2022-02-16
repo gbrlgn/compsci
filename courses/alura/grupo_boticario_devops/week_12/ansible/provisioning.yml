@@ -1,13 +1,5 @@
 ---
-- hosts: all
-
-  handlers:
-    - name: 'Reinicia o Apache'
-      service:
-        name: apache2
-        state: restarted
-      become: yes
-
+hosts: database
   tasks:
     - name: 'Instala pacotes de dependência do SO'
       apt:
@@ -15,12 +7,6 @@
         state: latest
       become: yes
       with_items:
-        - php8
-        - apache2
-        - libapache2-mod-php8
-        - php8-gd
-        - php8-mcrypt
-        - php8-mysql
         - mysql-server-5.6
         - python-mysqldb
 
@@ -37,6 +23,14 @@
         password: cso
         priv: 'wordpress_db.*:ALL'
         state: present
+
+- hosts: wordpress
+  handlers:
+    - name: 'Reinicia o Apache'
+      service:
+        name: apache2
+        state: restarted
+      become: yes
 
     - name: 'Download do WordPress'
       get_url:
