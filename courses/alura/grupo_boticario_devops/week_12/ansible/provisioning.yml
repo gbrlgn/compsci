@@ -1,13 +1,12 @@
 ---
 - hosts: all
   tasks:
-    - name: 'Instala o PHP 8'
+    - name: 'Instala pacotes de dependência do SO'
       apt:
-        name: php8
+        name: '{{ item }}'
         state: latest
       become: yes
-    - name: 'Instala o Apache'
-      apt:
-        name: apache2
-        state: latest
-      become: yes
+      with_items:
+        - php8
+        - apache2
+        - libapache2-mod-php8
