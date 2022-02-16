@@ -15,3 +15,17 @@
         - php8-mysql
         - mysql-server-5.6
         - python-mysqldb
+
+    - name: 'Cria o banco MySQL'
+      mysql_db:
+        name: wordpress_db
+        login_user: root
+        state: present
+
+    - name: 'Cria um usuário no MySQL'
+      mysql_user:
+        login_user: root
+        name: Gabriel
+        password: cso
+        priv: 'wordpress_db.*:ALL'
+        state: present
