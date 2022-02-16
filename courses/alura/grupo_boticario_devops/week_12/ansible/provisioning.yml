@@ -26,9 +26,9 @@ hosts: database
     - name: 'Cria um usuário no MySQL'
       mysql_user:
         login_user: root
-        name: Gabriel
+        name: '{{ wp_username }}'
         password: cso
-        priv: 'wordpress_db.*:ALL'
+        priv: '{{ wp_db_name }}.*:ALL'
         state: present
         host: '{{ item }}'
       with_items:
