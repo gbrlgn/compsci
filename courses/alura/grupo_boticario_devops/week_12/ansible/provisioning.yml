@@ -57,9 +57,10 @@ hosts: database
         replace: '{{ item.value }}'
         backup: yes
       with_items:
-        - { regex: 'database_name_here', value: 'wordpress_db'}
-        - { regex: 'username_here', value: 'wordpress_user'}
-        - { regex: 'password_here', value: '12345'}
+        - { regex: 'database_name_here', value: 'wordpress_db' }
+        - { regex: 'username_here', value: 'wordpress_user' }
+        - { regex: 'password_here', value: '12345' }
+        - { regex: 'localhost', value: '172.17.177.42' }
       become: yes
 
     - name: 'Configura Apache para servir o Wordpress'
