@@ -7,6 +7,6 @@
 
 (defn conta
   [total-agora elementos]
-  (if (next elementos)
+  (if (seq elementos)
     (recur (inc total-agora (next elementos)))
-    (inc total-agora)))
+    total-agora))
