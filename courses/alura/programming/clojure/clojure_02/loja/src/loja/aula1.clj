@@ -5,7 +5,7 @@
 (def meu-map
   [func seq]
   (let [prim (first seq)]
-    (if prim
+    (if (not(nil? prim))
       (do
         (func prim)
         (meu-map func (rest seq))))))
