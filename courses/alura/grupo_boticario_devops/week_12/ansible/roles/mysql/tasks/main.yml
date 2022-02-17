@@ -1,13 +1,4 @@
 ---
-- name: 'Instala pacotes de dependência do SO'
-  apt:
-    name: '{{ item }}'
-    state: latest
-  become: yes
-  with_items:
-    - mysql-server-5.6
-    - python-mysqldb
-
 - name: 'Cria o banco MySQL'
   mysql_db:
     name: wordpress_db
