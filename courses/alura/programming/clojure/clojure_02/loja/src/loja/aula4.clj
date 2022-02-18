@@ -19,13 +19,4 @@
 (let [pedidos (l.db/todos-os-pedidos)
       resumo (resumo-ord-usuario pedidos)]
   (println "Resumo" resumo)
-  (println "Primeiro" (first resumo))
-  (println "Segundo" (second resumo))
-  (println "Resto" (rest resumo))
-  (println "Classe" (class resumo))
-  (println "Enésimo" (nth resumo 1))
-  (println "Take" (take 2 resumo)))
-
-(defn top-2
-  [pedidos]
-  (take 2 pedidos))
+  (println "Top 2" (take 2 resumo)))
