@@ -9,7 +9,7 @@ resource "aws_security_group" "acesso_ssh" {
             to_port = 22
             protocol = "tcp"
             
-            cidr_blocks = ["152.244.252.0/24"]
+            cidr_blocks = var.cidrs_acesso_remoto
             ipv6_cidr_blocks = []
             prefix_list_ids = []
             security_groups = []
@@ -30,7 +30,7 @@ resource "aws_security_group" "acesso_ssh_us_east_2" {
             to_port = 22
             protocol = "tcp"
             
-            cidr_blocks = ["152.244.252.0/24"]
+            cidr_blocks = var.cidrs_acesso_remoto
             ipv6_cidr_blocks = []
             prefix_list_ids = []
             security_groups = []
