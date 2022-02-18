@@ -10,6 +10,8 @@ resource "aws_instance" "dev" {
     tags = {
         Name = "dev${count.index}"
     }
+
+    vpc_security_group_ids = ["${aws_security_group.acesso_ssh.id}"]
 }
 
 resource "aws_security_group" "acesso_ssh" {
@@ -23,11 +25,20 @@ resource "aws_security_group" "acesso_ssh" {
             to_port = 22
             protocol = "tcp"
             
-            cidr_blocks = ["152.244.252.25/32"]
+            cidr_blocks = ["152.244.252.0/24"]
             ipv6_cidr_blocks = []
             prefix_list_ids = []
             security_groups = []
             self = true
         }
     ]
+}
+
+resource "aws_s3_bucket" "dev4" {
+    bucket = "terraform-dev4"
+    acl    = "private"
+    tags = {
+        Name = "terraform-dev4"
+        Environment = "Dev"
+    }
 }
