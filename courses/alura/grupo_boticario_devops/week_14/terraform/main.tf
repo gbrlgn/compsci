@@ -9,6 +9,6 @@ resource "aws_instance" "dev" {
     instance_type = "t2.micro"
     key_name = "terraform-aws"
     tags = {
-        Name = "1"
+        Name = "dev${count.index}"
     }
 }
