@@ -20,3 +20,8 @@
       resumo (resumo-ord-usuario pedidos)]
   (println "Resumo" resumo)
   (println "Top 2" (take 2 resumo)))
+
+(let [pedidos (l.db/todos-os-pedidos)
+      resumo (resumo-ord-usuario pedidos)]
+  (println "> 500" (filter #(> (:preco-total %) 500) resumo))
+  (println "> 500 some (se existe)" (some #(> (:preco-total %) 500) resumo)))
