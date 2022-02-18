@@ -1,5 +1,4 @@
 provider "aws" {
-    version = "~> 2.0"
     region = "us-east-1"
 }
 
@@ -11,4 +10,24 @@ resource "aws_instance" "dev" {
     tags = {
         Name = "dev${count.index}"
     }
+}
+
+resource "aws_security_group" "acesso_ssh" {
+    name = "acesso_ssh"
+    description = "acesso_ssh"
+
+    ingress = [
+        {
+            description = "acesso_ssh"
+            from_port = 22
+            to_port = 22
+            protocol = "tcp"
+            
+            cidr_blocks = ["152.244.252.25/32"]
+            ipv6_cidr_blocks = []
+            prefix_list_ids = []
+            security_groups = []
+            self = true
+        }
+    ]
 }
