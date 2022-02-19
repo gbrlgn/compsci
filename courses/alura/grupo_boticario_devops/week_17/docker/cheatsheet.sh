@@ -4,6 +4,9 @@ sudo groupadd docker
 sudo usermod -aG docker $USER 
 newgrp docker
 
+# Montar imagem de uma Dockerfile.
+docker build -t tag diretorio
+
 # Puxar do Docker Hub.
 docker pull container
 
