@@ -53,3 +53,5 @@ docker history id
 # Parar todos os containers.
 docker stop $(docker container ls -q)
 
+# Gerar imagem para envio ao Docker Hub.
+docker tag danielartine/app-node1.0 aluradocker/app-node:1.0
