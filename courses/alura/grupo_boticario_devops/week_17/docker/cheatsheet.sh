@@ -66,3 +66,14 @@ docker rmi $(docker image ls -aq)
 
 # Tamanho do container.
 docker ps -s
+
+# Roda o container (nginx) montado a um diretório.
+docker run -it -v /home/diretorio:app nginx
+
+docker run --mount type=bind.source=/home/diretorio.target=/app nginx
+
+# O volume ficaria em /var/lib/docker/volumes/meu-volume
+docker run -it -v meu-volume:/app nginx
+
+# Rodar container em um volume sem bind.
+docker run -it --mount source=meu-volume,target=/app ubuntu bash
