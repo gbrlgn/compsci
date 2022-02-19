@@ -86,3 +86,17 @@ docker run --mount type=tmpfs.source=/home/diretorio.target=/app ubuntu bash
 
 # Listar as redes disponíveis.
 docker network ls
+
+# Rodar container com um nome específico.
+docker run -it --name ubuntu1 ubuntu bash
+
+# Criar rede bridge.
+docker network create --driver bridge minha-bridge
+
+# Executar ping por meio do nome do container.
+docker run -it --name pong --network minha-bridge ubuntu sleep 1d
+
+docker run -it --name ubuntu1 --network minha-bridge ubuntu bash
+
+$ apt install -y iputils-ping
+ping pong
