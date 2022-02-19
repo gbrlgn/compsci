@@ -49,3 +49,7 @@ docker history id
 # execução de uma imagem.
 # Como a imagem é read-only, cada container
 # baseado nela faz uma camada write própria.
+
+# Parar todos os containers.
+docker stop $(docker container ls -q)
+
