@@ -35,3 +35,17 @@ docker port dockersamples/static-site
 # caso a 8080.
 docker run -d -p 8080:80 dockersamples/static-site
 
+# Listar imagens do Docker
+docker images
+
+# Inspecionar imagem
+docker inspect id 
+
+# Mostra o histórico da imagem e suas
+# camadass
+docker history id
+
+# Camadas são um conjunto de regras de
+# execução de uma imagem.
+# Como a imagem é read-only, cada container
+# baseado nela faz uma camada write própria.
