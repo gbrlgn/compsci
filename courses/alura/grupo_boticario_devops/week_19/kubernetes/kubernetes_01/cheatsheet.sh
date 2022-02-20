@@ -27,3 +27,6 @@ kubectl get pods -o wide
 
 # Listar serviços de pods.
 kubectl get svc
+
+# Deletar todos os pods.
+kubectl delete pods --all
