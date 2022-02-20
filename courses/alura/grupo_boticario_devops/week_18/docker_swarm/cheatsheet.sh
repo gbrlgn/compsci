@@ -55,3 +55,33 @@ docker service update --constraint-add node.role==role id
 # Reistrige o serviço ci10k3u7q6ti para 
 # funcionar somente no nó t76gee19fjs8.
 docker service update --constraint-add node.id==t76gee19fjs8 ci10k3u7q6ti
+
+# Replica o serviço entre os nós.
+docker service update --replicas 5 ci10k3u7q6ti
+
+# ou:
+docker service scale ci10k3u7q6ti=5
+
+# Replica serviços em modo global.
+docker service create -p porta:porta --mode global nome
+
+# Cria rede com o driver overlay.
+docker network create -d overlay meu_overlay
+
+# Cria serviços que utilizam este overlay.
+docker service create --name servico --network meu_overlay --replicas 2 alpine
+
+# Redes overlays criadas manualmente (User-Defined Overlay)
+# permitem a comunicação entre serviços por seus
+# nomes (Service Discovery), e são listadas
+# de maneira lazy para os workers.
+
+# Cria uma rede overlay que permite conexão de
+# serviços e containers standalone.
+docker network create -d overlay --attachable meu_overlay
+
+# Faz a implantação de uma pilha de arquivos.
+docket stack deploy --compose-file docker.compose.yml nome
+
+# Remove a pilha.
+docker stack rm nome
