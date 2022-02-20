@@ -30,3 +30,6 @@ kubectl get svc
 
 # Deletar todos os pods.
 kubectl delete pods --all
+
+# No Linux, o INTERNAL-IP é utilizado para o
+# mapeamento de IPs do cluster.
