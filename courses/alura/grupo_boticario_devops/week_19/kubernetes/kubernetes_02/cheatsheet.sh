@@ -47,5 +47,9 @@ kubectl rollout history deployment nginx-deployment
 # Cria uma anotação para o deployment atual.
 kubectl annotate deployment nginx-deployment kubernetes.io/change-cause="Definir a imagem com a versão latest"
 
-# Voltar para uma revisão do Deployment.
+# Volta para uma revisão do Deployment.
 kubectl rollout undo deployment nginx-deployment --to-revision=2
+
+# Executa um comando em um container
+# vinculado a um volume.
+kubectl exec -it pod-volume --container nginx-container -- bash
