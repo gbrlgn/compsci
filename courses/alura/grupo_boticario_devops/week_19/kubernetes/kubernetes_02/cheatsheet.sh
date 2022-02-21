@@ -1,35 +1,51 @@
 # Cria um pod do Kubernetes.
 kubectl run nginx-pod --image=nginx:latest
 
-# Listar pods.
+# Lista pods.
 kubectl get pods
 
-# Listar pods em tempo real.
+# Lista pods em tempo real.
 kubectl get pods --watch
 
-# Listar informações de um pod.
+# Lista informações de um pod.
 kubectl describe pod nginx-pod
 
-# Editar configurações do pod.
+# Edita configurações do pod.
 kubectl edit pos nginx-pod
 
-# Aplicar um pod de maneira declarativa.
+# Aplica um pod de maneira declarativa.
 kubectl apply -f ./primeiro-pod.yml
 
-# Deletar um pod.
+# Deleta um pod.
 kubectl delete pod nginx-pod
 
-# Executar um comando em um pod em execução.
+# Executa um comando em um pod em execução.
 kubectl exec -it portal-noticias -- bash
 
-# Listar pods com mais informações.
+# Lista pods com mais informações.
 kubectl get pods -o wide
 
-# Listar serviços de pods.
+# Lista serviços de pods.
 kubectl get svc
 
-# Deletar todos os pods.
+# Deleta todos os pods.
 kubectl delete pods --all
 
 # No Linux, o INTERNAL-IP é utilizado para o
 # mapeamento de IPs do cluster.
+
+# Lista os ReplicaSets.
+kubectl get rs
+
+# ReplicaSets auxiliam no mantimento automático de Pods.
+# Deployments englobam ReplicaSets mas permitem
+# um versionamento.
+
+# Lista as revisões de um Deployment.
+kubectl rollout history deployment nginx-deployment
+
+# Cria uma anotação para o deployment atual.
+kubectl annotate deployment nginx-deployment kubernetes.io/change-cause="Definir a imagem com a versão latest"
+
+# Voltar para uma revisão do Deployment.
+kubectl rollout undo deployment nginx-deployment --to-revision=2
