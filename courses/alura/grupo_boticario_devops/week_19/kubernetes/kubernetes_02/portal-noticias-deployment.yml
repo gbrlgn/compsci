@@ -18,6 +18,20 @@ spec:
         envFrom:
           configMapRef:
             name: portal-configmap
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 10
+          failureThreshold: 3
+          initialDelaySeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /inserir_noticias.php
+            port: 80
+          periodSeconds: 10
+          failureThreshold: 6
+          initialDelaySeconds: 3
   selector:
     matchLabels:
       app: portal-noticias
