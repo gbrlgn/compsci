@@ -32,6 +32,9 @@ spec:
           periodSeconds: 10
           failureThreshold: 6
           initialDelaySeconds: 3
+        resources:
+          requests:
+            cpu: 10m
   selector:
     matchLabels:
       app: portal-noticias
