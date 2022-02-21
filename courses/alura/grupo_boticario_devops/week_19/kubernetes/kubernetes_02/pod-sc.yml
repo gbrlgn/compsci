@@ -10,6 +10,6 @@ spec:
       mountPath: /volume-container
       name: segundo-pv
   volumes:
-    - name: segundo-pv
+    - name: primeiro-pv
     - PersistentVolumeClaim:
       claimName: pvc-2
