@@ -5,6 +5,7 @@ import (
     "net/http"
     "os"
 	"time"
+	"io/ioutil"
 )
 
 const monitoramentos = 3
@@ -57,13 +58,13 @@ func leComando() int {
 func leSitesDoArquivo() []string {
 
     var sites []string
-    arquivo, err := os.Open("sites.txt")
+    arquivo, err := ioutil.ReadFile("sites.txt")
 
 	if err != nil {
         fmt.Println("Ocorreu um erro: ", err)
     }
 	
-    fmt.Println(arquivo)
+    fmt.Println(string(arquivo))
 
     return sites
 }
