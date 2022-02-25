@@ -56,3 +56,36 @@
     (.start (Thread. (fn []
                        (Thread/sleep 4000)
                        (pprint hospital))))))
+
+(defn start-thread-doseq
+  [hospital pessoa]
+  (Thread. (fn [] chega-em-atom! hospital pessoa)))
+
+(defn simula-um-dia-paralelo-doseq
+  "Executa para cada elemento."
+  []
+  (let
+      [hospital (atom (h.model/novo-hospital))
+       pessoas ["111", "222", "333", "444", "555", "666"]]
+    (doseq
+        [pessoa pessoas]
+      (start-thread-doseq hospital pessoa))
+    (.start (Thread. (fn []
+                       (Thread/sleep 4000)
+                       (pprint hospital))))))
+
+(defn start-thread-dotimes
+  "Executa um número de vezes."
+  [hospital pessoa]
+  (Thread. (fn [] chega-em-atom! hospital pessoa)))
+
+(defn simula-um-dia-paralelo-dotimes
+  []
+  (let
+      [hospital (atom (h.model/novo-hospital))]
+    (dotimes
+        [pessoa 6]
+      (start-thread-doseq hospital pessoa))
+    (.start (Thread. (fn []
+                       (Thread/sleep 4000)
+                       (pprint hospital))))))
