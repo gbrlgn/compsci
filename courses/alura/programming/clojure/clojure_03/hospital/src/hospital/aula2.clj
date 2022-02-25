@@ -25,3 +25,39 @@
     (pprint @hospital2)
     ;; Adiciona membro à fila.
     (swap! hospital2 update :laboratorio1 conj "111")))
+
+(defn chega-em-atom-rand!
+  [hospital pessoa]
+  (swap! hospital (h.logic/chega-em-pausado hospital :espera pessoa))
+  (println pessoa "inserida"))
+
+(defn simula-um-dia-paralelo
+  []
+  (let [hospital (atom (h.model/novo-hospital))]
+    (.start (Thread. (fn [] (chega-em-atom-rand! "111"))))
+    (.start (Thread. (fn [] (chega-em-atom-rand! "222"))))
+    (.start (Thread. (fn [] (chega-em-atom-rand! "333"))))
+    (.start (Thread. (fn [] (chega-em-atom-rand! "444"))))
+    (.start (Thread. (fn [] (chega-em-atom-rand! "555"))))
+    (.start (Thread. (fn [] (chega-em-atom-rand! "666"))))
+    (.start (Thread. (fn []
+                       (Thread/sleep 4000)
+                       (pprint hospital))))))
+
+(defn chega-em-atom!
+  [hospital pessoa]
+  (swap! hospital (h.logic/chega-em hospital :espera pessoa))
+  (println pessoa "inserida"))
+
+(defn simula-um-dia-paralelo
+  []
+  (let [hospital (atom (h.model/novo-hospital))]
+    (.start (Thread. (fn [] (chega-em-atom! "111"))))
+    (.start (Thread. (fn [] (chega-em-atom! "222"))))
+    (.start (Thread. (fn [] (chega-em-atom! "333"))))
+    (.start (Thread. (fn [] (chega-em-atom! "444"))))
+    (.start (Thread. (fn [] (chega-em-atom! "555"))))
+    (.start (Thread. (fn [] (chega-em-atom! "666"))))
+    (.start (Thread. (fn []
+                       (Thread/sleep 4000)
+                       (pprint hospital))))))

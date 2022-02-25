@@ -17,7 +17,7 @@
   [hospital departamento pessoa]
   (if (cabe-na-fila? hospital departamento)
     (do
-      (Thread/sleep 1000)
+      (Thread/sleep (* (rand) 2000))
       (update hospital departamento conj pessoa))
     (throw (ex-info "Fila já está cheia" {:tentando-adicionar pessoa}))))
 
