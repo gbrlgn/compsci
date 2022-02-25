@@ -3,6 +3,7 @@
   (:require [hospital.logic :as h.logic
              hospital.model :as h.model]))
 
+;; Delegates
 (defn chega-em!
   [hospital pessoa]
   (swap! hospital h.logic/chega-em :espera pessoa))
@@ -20,4 +21,7 @@
     (chega-em! hospital "Daniela")
     (chega-em! hospital "Guilherme")
     (transfere! hospital :espera :laboratorio1)
+    (transfere! hospital :espera :laboratorio2)
+    (transfere! hospital :espera :laboratorio3)
+    (transfere! hospital :laboratorio2 :laboratorio3)
     (pprint hospital)))
