@@ -37,7 +37,22 @@
   []
   (let [hospital (atom (h.model/novo-hospital))
         pessoas ["111", "222", "333", "444", "555", "666"]]
-    (mapv (start-thread hospital) pessoas)
+    (mapv (hospital) pessoas)
+    (.start (Thread. (fn []
+                       (Thread/sleep 4000)
+                       (pprint hospital))))))
+
+(defn start-thread-partial
+  [hospital pessoa]
+  (Thread. (fn [] chega-em-atom! hospital pessoa)))
+
+(defn simula-um-dia-paralelo-partial
+  []
+  (let [hospital (atom (h.model/novo-hospital))
+        pessoas ["111", "222", "333", "444", "555", "666"]
+        start (partial start-thread-partial hospital)]
+    ;; O mapv gera um vetor de nil pois .start é void
+    (mapv start pessoas)
     (.start (Thread. (fn []
                        (Thread/sleep 4000)
                        (pprint hospital))))))
