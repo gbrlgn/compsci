@@ -2,12 +2,19 @@ package br.com.alura.ecommerce;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EmailSrv {
 
     public static void main(String[] args) {
         var emailService = new EmailSrv();
-        try (var service = new KafkaService(EmailSrv.class.getSimpleName(),
-                "ECOMMERCE_SEND_EMAIL", emailService::parse)) {
+        try (var service = new KafkaService(
+                EmailSrv.class.getSimpleName(),
+                "ECOMMERCE_SEND_EMAIL",
+                emailService::parse,
+                String.class,
+                Map.of())) {
             service.run();
         }
     }
