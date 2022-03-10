@@ -32,8 +32,8 @@
     (swap! cache carrega-se-nao-existe id carregadora)
     (get @cache id)))
 
-(def pacientes (->Cache (atom {} carrega-paciente)))
-(pprint pacientes)
+(def pacientes (->Cache (atom {}) carrega-paciente))
+  (pprint pacientes))
 (carrega! pacientes 15)
 (carrega! pacientes 30)
 (carrega! pacientes 15)
