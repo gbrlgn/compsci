@@ -1,6 +1,9 @@
 class Conta:
 
-    def __init__(self, numero, titular, saldo, limite):
+    # Atributo estático, pois está fora do init.
+    PI = 3.14
+
+    def __init__(self, numero, titular, saldo, limite, codigo_banco):
         print("Construindo objeto... {}".format(self))
         self.__numero = numero
         self.__titular = titular
@@ -35,3 +38,16 @@ class Conta:
     @limite.setter
     def limite(self, limite):
         self.__limite = limite
+
+    # Métodos estáticos não usam self.
+    @staticmethod
+    def codigo_banco():
+        return "001"
+
+    @staticmethod
+    def codigos_bancos():
+        return {
+            'BB': '001',
+            'Caixa': '104',
+            'Bradesco': '237'
+        }
