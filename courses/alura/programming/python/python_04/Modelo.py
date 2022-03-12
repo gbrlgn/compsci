@@ -46,14 +46,27 @@ class Serie(Programa):
         return f'{self.nome} - {self.ano} - {self.temporadas} temporadas - {self.likes}'
 
 
-class Playlist(list):
+class Playlist():
     def __init__(self, nome, programas):
         self.nome = nome
         # Objeto a ser iterado no lugar da classe.
-        super().__init__(programas)
+        # class Playlist(list):
+        # super().__init__(programas)
+        self.__programas = programas
 
+    def __getitem__(self, item):
+        return self.__programas[item]
+
+    def __len__(self):
+        return len(self.__programas)
+
+    @property
+    def listagem(self):
+        return self.__programas
+
+    @property
     def tamanho(self):
-        return len(self.programas)
+        return len(self.__programas)
 
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
@@ -79,4 +92,4 @@ for programa in filmes_e_series:
     print(programa)
 
 print(f'Tamanho do playlist: {len(playlist_fim_de_semana)}')
-print(f'Tá ou não tá? {demolidor in playlist_fim_de_semana}')
+print(playlist_fim_de_semana[0])
