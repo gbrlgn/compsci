@@ -19,6 +19,9 @@ class Programa:
     def nome(self, nome):
         self._nome = nome
 
+    def imprime(self):
+        print(f'{self.nome} - {self.ano} - {self.likes}')
+
 
 class Filme(Programa):
     def __init__(self, nome, ano, duracao):
@@ -27,6 +30,9 @@ class Filme(Programa):
         self.duracao = duracao
         self._likes = 0
 
+    def imprime(self):
+        print(f'{self.nome} - {self.ano} - {self.duracao} min - {self.likes}')
+
 
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
@@ -34,6 +40,9 @@ class Serie(Programa):
         self.ano = ano
         self.temporadas = temporadas
         self._likes = 0
+
+    def imprime(self):
+        print(f'{self.nome} - {self.ano} - {self.temporadas} temporadas - {self.likes}')
 
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
@@ -51,5 +60,4 @@ print(f'Nome: {atlanta.nome} - Likes: {atlanta.likes}')
 filmes_e_series = [vingadores, atlanta]
 
 for programa in filmes_e_series:
-    detalhes = programa.duracao if hasattr(programa, 'duracao') else programa.temporadas
-    print(f'{programa.nome} - {detalhes} D - {programa.likes}')
+    programa.imprime()
