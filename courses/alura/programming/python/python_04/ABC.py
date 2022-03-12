@@ -17,7 +17,11 @@ class Numero(Complex):
 
 numero = Numero()
 
-
+"""
+Não queremos permitir que ninguém instancie um 
+objeto da classe Programa, e queremos garantir que 
+todo mundo implemente o __str__ nas suas subclasses.
+"""
 class Programa(metaclass=ABCMeta):
     @abstractmethod
     def __str__(self):
