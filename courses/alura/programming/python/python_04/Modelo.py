@@ -19,8 +19,9 @@ class Programa:
     def nome(self, nome):
         self._nome = nome
 
-    def imprime(self):
-        print(f'{self.nome} - {self.ano} - {self.likes}')
+    # Representação string do objeto.
+    def __str__(self):
+        return f'{self.nome} - {self.ano} - {self.likes}'
 
 
 class Filme(Programa):
@@ -30,8 +31,8 @@ class Filme(Programa):
         self.duracao = duracao
         self._likes = 0
 
-    def imprime(self):
-        print(f'{self.nome} - {self.ano} - {self.duracao} min - {self.likes}')
+    def __str__(self):
+        return f'{self.nome} - {self.ano} - {self.duracao} min - {self.likes}'
 
 
 class Serie(Programa):
@@ -41,8 +42,8 @@ class Serie(Programa):
         self.temporadas = temporadas
         self._likes = 0
 
-    def imprime(self):
-        print(f'{self.nome} - {self.ano} - {self.temporadas} temporadas - {self.likes}')
+    def __str__(self):
+        return f'{self.nome} - {self.ano} - {self.temporadas} temporadas - {self.likes}'
 
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
