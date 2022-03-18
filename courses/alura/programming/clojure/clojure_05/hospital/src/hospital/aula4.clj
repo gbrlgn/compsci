@@ -1,65 +1,30 @@
 (ns hospital.aula4
-    (:use clojure.pprint))
+  (:use clojure.pprint)
+  (:require [schema.core :as s]))
 
-(defrecord PacienteParticular [id nome nascimento situacao])
-(defrecord PacientePlano [id nome nascimento situacao plano])
+(s/set-fn-validation! true)
 
-(defprotocol Cobravel
-    (deve-assinar? [paciente procedimento valor]))
+(def PosInt (s/pred pos-int? 'inteiro-positivo))
 
-(defn nao-urgente? [paciente]
-    (not= :urgente (:situacao paciente :normal)))
+(def Plano [s/Keyword])
 
-(extend-type PacienteParticular
-    Cobravel
-    (deve-assinar? [paciente, procedimento, valor]
-        (and (>= valor 50) (nao-eh-urgente? paciente))))
+(def Paciente
+  {:id PosInt 
+   :nome s/Str 
+   :plano Plano 
+   (s/optional-key :nascimento) s/Str})
 
-(extend-type PacientePlano
-    Cobravel
-    (deve-assinar? [paciente procedimento valor]
-        (let [plano (:plano paciente)]
-            (and (not (some #(= % procedimento) plano)) (nao-urgente? paciente)))))
+(pprint (s/validate Paciente {:id 15 :nome "Guilherme" :plano [:raio-x :ultrassom]}))
+(pprint (s/validate Paciente {:id 15 :nome "Guilherme" :plano [:raio-x]}))
+(pprint (s/validate Paciente {:id 15 :nome "Guilherme" :plano []}))
+(pprint (s/validate Paciente {:id 15 :nome "Guilherme" :plano nil}))
 
-(let [particular (->PacienteParticular 15 "Guilherme" "18/9/1981" :normal)
-    plano (->PacientePlano 15 "Guilherme" "18/9/1981" :normal [:raio-x :ultrassom])]
-  (pprint (deve-assinar? particular :raio-x 500))
-  (pprint (deve-assinar? particular :raio-x 40))
-  (pprint (deve-assinar? plano :raio-x 999999))
-  (pprint (deve-assinar? plano :coleta-de-sangue 999999)))
+(def Pacientes
+  {PosInt Paciente})
 
-(defmulti deve-assinar-multi? class)
-(defmethod deve-assinar-multi? PacienteParticular
-  [paciente]
-  (println "Invocando paciente particular.")
-  true)
-(defmethod deve-assinar-multi? PacientePlano
-  [paciente]
-  (println "Invocando paciente com plano.")
-  false)
+(pprint (s/validate Pacientes {}))
 
-(let [particular (->PacienteParticular 15 "Guilherme" "18/9/1981" :urgente)
-      plano (->PacientePlano 15 "Guilherme" "18/9/1981" :urgente [:raio-x :ultrassom])]
-  (pprint (deve-assinar-multi? particular))
-  (pprint (deve-assinar-multi? plano)))
-
-(defn tipo-de-autorizador [pedido]
-  (let [paciente (:paciente pedido)
-        situacao (:situacao paciente)
-        urgencia? (= :urgente situacao)]
-    (if urgencia?
-      :autorizado
-      (class paciente))))
-    
-(defmulti deve-assinar? tipo-de-autorizador)
-(defmethod deve-assinar? :autorizado [pedido]
-  false)
-(defmethod deve-assinar? PacienteParticular [pedido]
-  (>= (:valor pedido 0) 50))
-(defmethod deve-assinar? PacientePlano [pedido]
-  (not (some #(= % (:procedimento pedido)) (:plano (:paciente pedido)))))
-
-(let [particular (->PacienteParticular 15 "Guilherme" "18/9/1981" :urgente)
-      plano (->PacientePlano 15 "Guilherme" "18/9/1981" :urgente [:raio-x :ultrassom])]
-  (pprint (deve-assinar? [:paciente particular :valor 1000 :procedimento :coleta-de-sangue]))
-  (pprint (deve-assinar? [:paciente plano :valor 1000 :procedimento :coleta-de-sangue
+(let [guilherme {:id 15 :nome "Guilherme" :plano [:raio-x]}
+      daniela {:id 20 :nome "Daniela" :plano []}]
+  (pprint (s/validate Pacientes {15 guilherme}))
+  (pprint (s/validate Pacientes {20 daniela})))
