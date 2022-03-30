@@ -29,5 +29,4 @@ public class UsuarioDao {
 	public void deletar(Usuario usuario) {
 		em.remove(usuario);
 	}
-
 }

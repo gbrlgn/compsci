@@ -14,11 +14,16 @@ import br.com.alura.leilao.model.Usuario;
 @Repository
 public class LeilaoDao {
 
-	@PersistenceContext
+	// @PersistenceContext
 	private EntityManager em;
 
-	public void salvar(Leilao leilao) {
-		em.merge(leilao);
+    @Autowired
+    public LeilaoDao(EntityManager em) {
+        this.em = em;
+    }
+
+	public Leilao salvar(Leilao leilao) {
+		return em.merge(leilao);
 	}
 
 	public Leilao buscarPorId(Long id) {
