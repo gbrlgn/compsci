@@ -3,78 +3,49 @@ package br.com.alura.leilao.login;
 import org.junit.jupiter.api.Test;
 
 public class LoginTest {
-    private WebDriverDriver browser;
-    public static final String URL_LOGIN = "http://localhost:8080/login";
+    private LoginPage pagina;
 
-    @BeforeAll
-    public void beforeAll() {
-        System.setProperty("webdriver.firefox.driver", "/drivers/firefox");
-    }
-    
     @BeforeEach
     public void beforeEach() {
-        this.browser = new FirefoxDriver();
-        browser.navigate().to(URL_LOGIN);
+        this.pagina = new LoginPage();
     }
 
     @AfterEach
     public void afterEach() {
-        this.browser.quit();
+        this.pagina.fechar();
     }
 
     @Test
     public void deveEfetuarLoginValido() {
-        browser.findElement(By.id("username")).sendKeys("Fulano");
-        browser.findElement(By.id("password")).sendKeys("passwd");
-        browser.findElement(By.id("login-form")).submit();
+        pagina.preencherFormulario("Fulano", "passwd");
+        pagina.efetuarLogin();
 
-        Assert.assertFalse(
-            browser.getCurrentUrl()
-                .equals("http://localhost:8080/login")
-        );
+        Assert.assertFalse(pagina.isPaginaLogin());
 
         Assert.assertEquals(
             "Fulano",
-            browser.findElement(By.id("usuario_logado"))
-                .getText();
+            pagina.getNomeUsuarioLogado()
         );
     }
 
     @Test
     public void naoDeveEfetuarLoginInvalido() {
-        browser.findElement(By.id("username")).sendKeys("Inválido");
-        browser.findElement(By.id("password")).sendKeys("wrngpasswd");
-        browser.findElement(By.id("login-form")).submit();
+        pagina.preencherFormulario("Inválido", "wrngpasswd");
+        pagina.efetuarLogin();
 
-        Assert.assertTrue(
-            browser.getCurrentUrl()
-                .equals(URL_LOGIN + "?error")
-        );
+        Assert.assertTrue(pagina.isPaginaLoginErro());
 
-        Assert.assertTrue(
-            "Fulano",
-            browser.getPageSource()
-                .contains("Usuário e senha inválidos.");
-        );
+        Assert.assertNull(pagina.getNomeUsuarioLogado());
 
-        Assert.assertThrows(
-            NoSuchElementException.class, 
-            () -> browser.findElement(By.id("usuario_logado"))
-                .getText();
-        );
+        Assert.assertTrue(pagina.contemTexto("Usuário e senha inválidos."));
     }
 
     @Test
     public void naoDeveAcessarRestritaSemLogar() {
-        browser.navigate().to("http://localhost:8080/leiloes/2");
+        pagina.navegaParaLances();
 
-        Assert.assertTrue(
-            browser.getCurrentUrl().equals(URL_LOGIN);
-        );
+        Assert.assertTrue(pagina.isPaginaLogin());
 
-        Assert.assertFalse(
-            browser.getPageSource()
-                .contains("Dados do Leilão");
-        );
+        Assert.assertFalse(pagina.contemTexto("Dados do Leilão"));
     }
 }
