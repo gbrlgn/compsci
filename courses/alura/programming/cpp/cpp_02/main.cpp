@@ -4,15 +4,15 @@
 #include <vector>
 #include <fstream>
 #include <cstdlib>
-#include "nao_acertou.hpp"
-#include "letra_existe.hpp"
-#include "imprimir_cabecalho.hpp"
-#include "ler_arquivo.hpp"
-#include "sortear_palavra.hpp"
-#include "imprimir_erros.hpp"
-#include "imprimir_palavra.hpp"
-#include "chutar.hpp"
-#include "adicionar_palara.hpp"
+#include "headers/nao_acertou.hpp"
+#include "headers/letra_existe.hpp"
+#include "headers/imprimir_cabecalho.hpp"
+#include "headers/ler_arquivo.hpp"
+#include "headers/sortear_palavra.hpp"
+#include "headers/imprimir_erros.hpp"
+#include "headers/imprimir_palavra.hpp"
+#include "headers/chutar.hpp"
+#include "headers/adicionar_palara.hpp"
 
 using namespace std;
 
