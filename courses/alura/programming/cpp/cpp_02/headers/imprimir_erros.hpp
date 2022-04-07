@@ -1,4 +1,4 @@
 #pragma once
 #include <vector>
 
-void imprimir_erros(vector<char> chutes_errados)
+void forca::imprimir_erros(const vector<char> &chutes_errados);

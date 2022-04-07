@@ -1,5 +1,5 @@
 #include <iostream>
-#include "imprimir_palavra.hpp"
+#include "headers/imprimir_palavra.hpp"
 
 using namespace std;
 

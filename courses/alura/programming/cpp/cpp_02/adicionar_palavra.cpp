@@ -2,8 +2,8 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "ler_arquivo.hpp"
-#include "salvar_arquivo.hpp"
+#include "headers/ler_arquivo.hpp"
+#include "headers/salvar_arquivo.hpp"
 
 void adicionar_palavra() {
     cout << "Digite a nova palavra, em letras maiúsculas: " << endl;

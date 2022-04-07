@@ -1,6 +1,6 @@
 #include <iostream>
 #include "chuta.cpp"
-#include "letra_existe.cpp"
+#include "headers/letra_existe.cpp"
 
 using namespace std;
 

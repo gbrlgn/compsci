@@ -15,9 +15,10 @@
 #include "headers/adicionar_palara.hpp"
 
 using namespace std;
+using namespace forca;
 
-map<char, bool> chutou;
-vector<char> chutes_errados;
+static map<char, bool> chutou;
+static vector<char> chutes_errados;
 
 int main () {
     imprimir_cabecalho();
@@ -27,7 +28,7 @@ int main () {
     bool nao_enforcou = true;
     
     while (nao_acertou(palavra_secreta, chutou) && chutes_errado.size() < 5) {
-        imprimir_erros(chutes_errados);
+        forca::imprimir_erros(chutes_errados);
 
         imprimir_palavra_secreta(palavra_secreta, chutou);
 
